@@ -13,7 +13,7 @@ if (!defined('IN_MYBB')) {
 }
 
 // checked by other plugin files
-define('SMILEMENU_VERSION', '0.0.1');
+define('SMILEMENU_VERSION', '1.0');
 
 // register custom class autoloader
 spl_autoload_register('smClassAutoLoad');

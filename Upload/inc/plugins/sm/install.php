@@ -28,7 +28,6 @@ function sm_info()
 
 	$settingsLink = smBuildSettingsLink();
 
-	// if MyAlerts is installed
 	if ($settingsLink) {
 		$settingsLink = <<<EOF
 				<li style="list-style-image: url(styles/{$cp_style}/images/sm/settings.gif); margin-top: 10px;">
@@ -36,7 +35,6 @@ function sm_info()
 				</li>
 EOF;
 
-		$buttonPic = "styles/{$cp_style}/images/sm/donate.gif";
 		$smDescription = <<<EOF
 
 <table style="width: 100%;">
@@ -51,7 +49,7 @@ EOF;
 			<img src="styles/{$cp_style}/images/sm/logo.png" alt="{$lang->sm_logo}"/>
 			<br />
 			<br />
-			<a href="https://paypal.me/wildcardsearch"><img src="{$buttonPic}" style="outline: none; border: none;" /></a>
+			<a href="https://paypal.me/wildcardsearch"><img src="styles/{$cp_style}/images/sm/donate.gif" style="outline: none; border: none;" /></a>
 		</td>
 	</tr>
 </table>
@@ -87,7 +85,7 @@ function sm_is_installed()
 }
 
 /**
- * 
+ * run the installer
  *
  * @return void
  */
@@ -103,7 +101,7 @@ function sm_install()
 }
 
 /**
- * edit the footer template
+ * edit templates & set the cache version
  *
  * @return void
  */
@@ -115,14 +113,6 @@ function sm_activate()
 		$lang->load('sm');
 	}
 
-	/* // version check
-	$smOldVersion = SmileMenuCache::getInstance()->getVersion();
-	if (version_compare($smOldVersion, SMILEMENU_VERSION, '<') &&
-		$smOldVersion != '' &&
-		$smOldVersion != 0) {
-		require MYBB_ROOT . 'inc/plugins/sm/upgrade.php';
-    } */
-
 	require_once MYBB_ROOT . '/inc/adminfunctions_templates.php';
 
 	// update the version (so we don't try to upgrade next round)
@@ -133,7 +123,7 @@ function sm_activate()
 }
 
 /**
- * 
+ * restore templates
  *
  * @return void
  */
@@ -148,7 +138,7 @@ function sm_deactivate()
  * delete setting group and settings, templates,
  * and the style sheet
  *
- * undo MyAlerts integration and unset the cached version
+ * unset the cached version
  *
  * @return void
  */
@@ -181,6 +171,7 @@ function smGetSettingsgroup()
 		$query = $db->simple_select("settinggroups", "gid", "name='sm_settings'");
 		$gid = (int) $db->fetch_field($query, 'gid');
 	}
+
 	return $gid;
 }
 
@@ -225,6 +216,7 @@ function smBuildSettingsLink()
 EOF;
 		}
 	}
+
 	return false;
 }
 
