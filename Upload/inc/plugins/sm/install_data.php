@@ -13,7 +13,7 @@ $settings = array(
 			'name' => 'sm_settings',
 			'title'  => $lang->sm_plugin_settings_title,
 			'description' => $lang->sm_settingsgroup_description,
-			'disporder'  => '102',
+			'disporder'  => '110',
 			'isdefault'  => 0,
 		),
 		'settings' => array(

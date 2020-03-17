@@ -53,6 +53,11 @@ function smXmlhttp()
 	return;
 }
 
+/**
+ * cache smilies, if necessary, and return them
+ *
+ * @return array|bool false on error/empty cache
+ */
 function smCacheSmilies()
 {
 	global $cache, $mybb, $theme;
@@ -63,6 +68,7 @@ function smCacheSmilies()
 		$localCache = array();
 
 		$smilies = $cache->read("smilies");
+
 		if (is_array($smilies) &&
 			!empty($smilies)) {
 			foreach ($smilies as $sid => $smilie) {
@@ -82,15 +88,11 @@ function smCacheSmilies()
 		}
 	}
 
-	if ($localCache === false) {
-		return false;
-	}
-
 	return $localCache;
 }
 
 /**
- * search for usernames beginning with search text and echo JSON
+ * retrieve the smilie cache and echo JSON
  *
  * @return void
  */
